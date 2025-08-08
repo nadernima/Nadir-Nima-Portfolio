@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nadir Nima – Portfolio</title>
+  <meta name="description" content="Portfolio of Nadir Nima – Software Engineering student with front-end, back-end, and UX/UI skills." />
+  <style>
+    :root{
+      --bg:#0e0f13;           /* background */
+      --panel:#151821;        /* cards/nav */
+      --muted:#9aa4b2;        /* secondary text */
+      --text:#e7ebf3;         /* primary text */
+      --accent:#6ae3ff;       /* accent */
+      --accent-2:#b388ff;     /* subtle gradient partner */
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    /* Accessibility helper */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* Mobile menu button */
+    .menu-btn{display:none;background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--text);font-size:22px;line-height:1;padding:8px 12px;border-radius:10px}
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(80% 60% at 20% 10%,#121520 0%,#0e0f13 60%),var(--bg);color:var(--text);font:15.5px/1.65 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    .container{width:min(1100px,92%);margin-inline:auto}
+
+    /* NAV */
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,rgba(14,15,19,.9),rgba(14,15,19,.6) 60%,transparent);backdrop-filter:saturate(140%) blur(8px);}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:800;letter-spacing:.3px}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 0 18px rgba(106,227,255,.6)}
+    nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 14px;border-radius:12px}
+    nav a:hover, nav a.active{color:var(--text);background:rgba(255,255,255,.06)}
+
+    /* HERO */
+    .hero{padding:86px 0 40px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);color:var(--muted);font-size:12px;margin-bottom:12px}
+    .hero h1{font-size:46px;line-height:1.1;margin:0 0 16px}
+    .highlight{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{color:var(--muted);margin:0 0 24px}
+    .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);text-decoration:none;color:var(--text);background:linear-gradient(135deg,rgba(106,227,255,.12),rgba(179,136,255,.12));box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b0c0f;border:0;font-weight:700}
+
+    .portrait{justify-self:end;background:linear-gradient(135deg,rgba(106,227,255,.18),rgba(179,136,255,.18));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:18px}
+    .portrait img{display:block;width:260px;height:260px;object-fit:cover;border-radius:14px}
+
+    /* SECTION */
+    section{padding:70px 0}
+    .section-title{display:flex;align-items:center;gap:12px;margin:0 0 24px;font-size:22px}
+    .section-title .bar{width:16px;height:16px;border-radius:4px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 0 18px rgba(106,227,255,.4)}
+
+    /* GRID + CARDS */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .card{grid-column:span 6;background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+    .card h3{margin:0;font-size:18px}
+    .card p{margin:0;color:var(--muted)}
+    .card .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--muted);font-size:12px}
+    .card .actions{margin-top:auto}
+    .card .actions a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);text-decoration:none;color:var(--text)}
+    .card .actions a:hover{background:rgba(255,255,255,.06)}
+
+    /* SKILLS */
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{padding:10px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06)}
+
+    /* TIMELINE */
+    .timeline{display:grid;gap:14px}
+    .timeline .item{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:16px}
+    .timeline .meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-top:6px}
+
+    /* CONTACT */
+    .contact{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .contact .panel{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:18px}
+    .contact a{color:var(--accent)}
+    .note{color:var(--muted);font-size:13px}
+
+    /* FOOTER */
+    footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.06)}
+
+    /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 1024px){
+      .hero{grid-template-columns:1fr .9fr}
+      .hero h1{font-size:38px}
+      .container{width:min(950px,92%)}
+      .card{grid-column:span 12}
+    }
+    @media (max-width: 780px){
+      header{backdrop-filter:blur(10px)}
+      .nav{gap:10px}
+      nav ul{display:none;position:absolute;right:4%;top:60px;background:var(--panel);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:6px;box-shadow:var(--shadow)}
+      nav ul.show{display:flex;flex-direction:column;min-width:220px}
+      nav a{padding:12px 14px}
+      .menu-btn{display:inline-flex}
+
+      .hero{grid-template-columns:1fr;padding:72px 0 28px}
+      .hero h1{font-size:32px}
+      .eyebrow{font-size:11px}
+      .portrait{justify-self:start}
+
+      .grid{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      section{padding:56px 0}
+    }
+    @media (max-width: 420px){
+      body{font-size:15px}
+      .btn{width:100%;justify-content:center}
+      .portrait img{width:200px;height:200px}
+      .hero h1{font-size:28px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top"><span class="dot"></span><span>Nadir Nima</span></a>
+      <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button>
+      <nav>
+        <ul id="menu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#certs">Certifications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div>
+        <span class="eyebrow">Software Engineering Student · Front‑end & Back‑end · UX/UI aware</span>
+        <h1>Hi, I’m <span class="highlight">Nadir Nima</span>.</h1>
+        <p>Software Engineering student at the American University of Afghanistan. I build clean, accessible web apps end‑to‑end using HTML/CSS/JS, Python/Django, and MySQL. I care about thoughtful UX and ship pixel‑polished interfaces with reliable back‑ends.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="assets/Nadir-Ali-Alizada-Resume-20250611.pdf" target="_blank" rel="noopener">Download Résumé</a>
+        </div>
+      </div>
+      <div class="portrait" aria-hidden="true">
+        <img src="assets/portrait.jpg" alt="Portrait of Nadir Nima"/>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="section-title"><span class="bar"></span>About</h2>
+      <p>I’m a hands‑on developer who learns by building. On the front end I focus on semantic HTML, modern CSS, and component‑based JavaScript. On the back end I’m comfortable with Python, Django, and relational databases. I also study UX/UI so the things I build are intuitive, consistent, and accessible.</p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title"><span class="bar"></span>Featured Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Turbo Engine</h3>
+          <p>Interactive demo site exploring layouts and components.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
+          <div class="actions"><a href="https://nadernima.github.io/turbo-engine/" target="_blank" rel="noopener">Live Demo</a></div>
+        </article>
+        <article class="card">
+          <h3>QR Code Challenge</h3>
+          <p>Frontend Mentor solution with responsive layout and card styling.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          <div class="actions"><a href="https://nadernima.github.io/Fron-end-mentor-Qr-code-challenge/" target="_blank" rel="noopener">Live Demo</a></div>
+        </article>
+        <article class="card">
+          <h3>Single Price Grid</h3>
+          <p>Pricing grid using CSS grid and clean typography.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          <div class="actions"><a href="https://nadernima.github.io/Single-price-grid/" target="_blank" rel="noopener">Live Demo</a></div>
+        </article>
+        <article class="card">
+          <h3>Order Summary Component</h3>
+          <p>Card component with focus states and mobile‑first CSS.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          <div class="actions"><a href="https://nadernima.github.io/order-summary-componant/" target="_blank" rel="noopener">Live Demo</a></div>
+        </article>
+        <article class="card">
+          <h3>State Preview Card</h3>
+          <p>Hover interactions and content hierarchy practice.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          <div class="actions"><a href="https://nadernima.github.io/state-preview-card-component/" target="_blank" rel="noopener">Live Demo</a></div>
+        </article>
+        <article class="card">
+          <h3>3 Column Preview Card</h3>
+          <p>Reusable card layout with semantic structure.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          <div class="actions"><a href="https://nadernima.github.io/3-column-preview-card/" target="_blank" rel="noopener">Live Demo</a></div>
+        </article>
+        <article class="card">
+          <h3>Effective Potato</h3>
+          <p>Playground repo for layout/typography experiments.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
+          <div class="actions"><a href="https://nadernima.github.io/effective-potato/" target="_blank" rel="noopener">Live Demo</a></div>
+        </article>
+        <article class="card">
+          <h3>Four Card Feature Section</h3>
+          <p>Responsive feature grid with balanced spacing.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          <div class="actions"><a href="https://nadernima.github.io/four-card-feature-section/" target="_blank" rel="noopener">Live Demo</a></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2 class="section-title"><span class="bar"></span>Skills</h2>
+      <div class="skills">
+        <span class="chip">HTML</span>
+        <span class="chip">CSS</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">React</span>
+        <span class="chip">Python</span>
+        <span class="chip">Django</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">REST APIs</span>
+        <span class="chip">Git & GitHub</span>
+        <span class="chip">Version Control</span>
+        <span class="chip">Responsive Design</span>
+        <span class="chip">UX/UI Basics</span>
+        <span class="chip">Java (coursework)</span>
+        <span class="chip">Data Structures & Algorithms</span>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2 class="section-title"><span class="bar"></span>Education</h2>
+      <div class="timeline">
+        <div class="item">
+          <strong>BSc in Software Engineering</strong>
+          <div class="meta"><span>American University of Afghanistan</span><span>2021 – Present</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certs">
+      <h2 class="section-title"><span class="bar"></span>Certifications</h2>
+      <div class="timeline">
+        <div class="item">
+          <strong>Meta Front‑End Developer Certificate</strong>
+          <div class="meta"><span>Meta</span><span>Completed</span></div>
+        </div>
+        <div class="item">
+          <strong>Meta Back‑End Developer Certificate</strong>
+          <div class="meta"><span>Meta</span><span>In Progress</span></div>
+        </div>
+        <div class="item">
+          <strong>Google UX Certificate</strong>
+          <div class="meta"><span>Google</span><span>Started</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title"><span class="bar"></span>Contact</h2>
+      <div class="contact">
+        <div class="panel">
+          <h3>Let’s connect</h3>
+          <p class="note">Email is intentionally hidden for privacy. Reach me via LinkedIn or GitHub.</p>
+        </div>
+        <div class="panel">
+          <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/nadir-nima-963a921a7" target="_blank" rel="noopener">linkedin.com/in/nadir-nima-963a921a7</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/nadernima" target="_blank" rel="noopener">github.com/nadernima</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Nadir Nima</div>
+  </footer>
+
+  <script>
+    // set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // highlight active nav link on scroll
+    const sections = ['about','projects','skills','education','certs','contact'].map(id=>document.getElementById(id));
+    const links = Array.from(document.querySelectorAll('nav a'));
+    const onScroll = () => {
+      let current = null;
+      const scrollPos = window.scrollY + 120;
+      sections.forEach(sec => { if(sec && sec.offsetTop <= scrollPos) current = sec.id; });
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+current));
+    };
+    document.addEventListener('scroll', onScroll);
+
+    // mobile menu toggle for small screens
+    const btn = document.querySelector('.menu-btn');
+    const menu = document.getElementById('menu');
+    if(btn){
+      btn.addEventListener('click', ()=>{
+        const showing = menu.classList.toggle('show');
+        btn.setAttribute('aria-expanded', showing ? 'true' : 'false');
+      });
+    }
+    // close menu when clicking a link (mobile)
+    if(menu){
+      document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
+        menu.classList.remove('show');
+        if(btn) btn.setAttribute('aria-expanded','false');
+      }));
+    }
+
+  </script>
+</body>
+</html>
