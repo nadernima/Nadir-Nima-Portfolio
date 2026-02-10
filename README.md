@@ -10,7 +10,7 @@ Built 2025-08-08 13:05 UTC.
 - **Vercel**: import as a static project.
 
 Main file: `index.html`  
-Assets: `/assets/portrait.jpg`, `/assets/Nadir-Ali-Alizada-Resume-20250611.pdf`
+Assets: `/assets/portrait.jpg`, `/assets/Nadir-Ali-Alizada-FlowCV-Resume-20260210.pdf`
 
 ## Edit
 Open `index.html` and modify content (bio, skills, links). Colors and spacing are near the top of the file under `:root`.
